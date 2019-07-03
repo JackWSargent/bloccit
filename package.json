@@ -1,0 +1,22 @@
+{
+  "name": "bloccit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "set NODE_ENV=test&& jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackWSargent/bloccit.git"
+  },
+  "keywords": [
+    "bloccit"
+  ],
+  "author": "Jack Sargent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JackWSargent/bloccit/issues"
+  },
+  "homepage": "https://github.com/JackWSargent/bloccit#readme"
+}
