@@ -1,3 +1,15 @@
 body {
     padding-top: 54px;
 }
+
+.page-label {
+    padding-top: 5%;
+}
+
+.nav-item {
+    color: black;
+}
+
+.nav-item:hover {
+    color: rgb(14, 14, 14);
+}
