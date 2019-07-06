@@ -8,12 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
   }, {});
   Topic.associate = function(models) {
     Topic.hasMany(models.Banner, {
       foreignKey: "topicId",
       as: "banners",
+    });
+    Topic.hasMany(models.Post, {
+      foreignKey: "topicId",
+      as: "posts",
     });
   };
   return Topic;
