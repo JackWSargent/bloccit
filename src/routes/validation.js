@@ -12,5 +12,16 @@ module.exports = {
       } else {
         return next();
       }
+    },
+    validateTopics(req, res, next) {
+        req.checkBody("title", "must be at least 5 characters long").isLength({min: 5});
+        req.checkBody("description", "must be at least 10 characters long").isLength({min: 10});
+        const error = req.validationErrors();
+        if(error) {
+            req.flash("error", error);
+            return res.redirect(303, req.headers/referer)
+        } else {
+            return next();
+        }
     }
-  }
+}
