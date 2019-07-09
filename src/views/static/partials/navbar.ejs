@@ -12,6 +12,18 @@
           <li class="list-group-item list-group-item-action">
             <a class="nav-item" href="/topics">Topics</a>
           </li>
+          <% if(currentUser) { %>
+            <li class="list-group-item list-group-item-action">
+              <a class="nav-item" href="/users/sign_out">Sign out</a>
+            </li>
+          <% } else { %>
+            <li class="list-group-item list-group-item-action">
+              <a class="nav-item" href="/users/sign_up">Sign up</a>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <a class="nav-item" href="/users/sign_in">Sign in</a>
+            </li>
+          <% }%>
         </ul>
       </div>
     </div>
