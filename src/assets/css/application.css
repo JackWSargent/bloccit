@@ -13,3 +13,7 @@ body {
 .nav-item:hover {
     color: rgb(14, 14, 14);
 }
+
+.page {
+    padding-top: 3.5%;
+}

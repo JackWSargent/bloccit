@@ -6,7 +6,7 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
 
-    <main class="container">
+    <main class="container page">
       <% include ../static/partials/messages.ejs %>
       <h1>New Post</h1>
       <form action="/topics/<%= topicId %>/posts/create" method="post">
