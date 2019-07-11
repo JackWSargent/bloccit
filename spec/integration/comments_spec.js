@@ -209,7 +209,7 @@ describe("routes : comments", () => {
             });
           })
         });
-            
+            //
       describe("POST /topics/:topicId/posts/:postId/comments/:id/destroy", () => {
         beforeEach((done) => {    // before each suite in this context
             request.get({           // mock authentication
