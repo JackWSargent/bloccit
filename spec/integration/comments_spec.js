@@ -15,6 +15,7 @@ describe("routes : comments", () => {
     this.topic;
     this.post;
     this.comment;
+    this.user2;
     sequelize.sync({force: true}).then((res) => {
       User.create({
         email: "starman@tesla.com",
@@ -176,4 +177,71 @@ describe("routes : comments", () => {
           });
         });
       }); //end context for signed in user
+
+    describe("admin deleting another members comment and a member trying to delete another members comment", () => {
+        beforeEach((done) => {    // before each suite in this context
+            request.get({           // mock authentication
+              url: "http://localhost:3000/auth/fake",
+              form: {
+                role: "member",     // mock authenticate as member user
+                userId: 2
+              }
+            },
+              (err, res, body) => {
+                done();
+              }
+            );
+        });
+        it("should not delete the comment with the associated ID", (done) => {
+          Comment.findAll()
+          .then((comments) => {
+            const commentCountBeforeDelete = comments.length;
+            expect(commentCountBeforeDelete).toBe(1);
+            request.post(
+              `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+              (err, res, body) => {
+              Comment.findAll()
+              .then((comments) => {
+                expect(err).toBeNull();
+                expect(comments.length).toBe(commentCountBeforeDelete);
+                done();
+              })
+            });
+          })
+        });
+            
+      describe("POST /topics/:topicId/posts/:postId/comments/:id/destroy", () => {
+        beforeEach((done) => {    // before each suite in this context
+            request.get({           // mock authentication
+              url: "http://localhost:3000/auth/fake",
+              form: {
+                role: "admin",     // mock authenticate as member user
+                userId: 3
+              }
+            },
+              (err, res, body) => {
+                done();
+              }
+            );
+        });
+        it("should delete the comment with the associated ID", (done) => {
+              Comment.findAll()
+              .then((comments) => {
+                const commentCountBeforeDelete = comments.length;
+                expect(commentCountBeforeDelete).toBe(1);
+                request.post(
+                 `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+                  (err, res, body) => {
+                  expect(res.statusCode).toBe(302);
+                  Comment.findAll()
+                  .then((comments) => {
+                    expect(err).toBeNull();
+                    expect(comments.length).toBe(commentCountBeforeDelete - 1);
+                    done();
+                  })
+                });
+            })
+        });
+      });
+    });
 });
