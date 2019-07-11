@@ -55,7 +55,7 @@ describe("Vote", () => {
         });
       });
     });
-  });
+    });
   describe("#create()", () => {
         it("should create an upvote on a post for a user", (done) => {
           Vote.create({
