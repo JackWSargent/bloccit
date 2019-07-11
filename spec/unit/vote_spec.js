@@ -213,4 +213,22 @@ describe("Vote", () => {
           });
         });
     });
+    describe("#getPoints", () => {
+      it("should return number of points", (done) => {
+        Vote.create({
+          userId: this.user.id,
+          postId: this.post.id,
+          value: 1,
+        })
+        .then((vote) => {
+          let num = this.post.getPoints();
+          expect(num).toBe(1);
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        })
+      })
+    })
 });
