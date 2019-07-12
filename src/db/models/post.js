@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         postId: post.id
       });
     });
-  };
+  };//
   Post.prototype.getPoints = function(){
     if(this.votes.length === 0) return 0
 
