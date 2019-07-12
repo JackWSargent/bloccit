@@ -2,24 +2,17 @@
 const request = require("request");
 const server = require("../../src/server");
 const base = "http://localhost:3000/topics/";
-
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
 const User = require("../../src/db/models").User;
 const Vote = require("../../src/db/models").Vote;
-
 describe("routes : votes", () => {
-
   beforeEach((done) => {
-
- // #2
     this.user;
     this.topic;
     this.post;
     this.vote;
-
- // #3
     sequelize.sync({force: true}).then((res) => {
       User.create({
         email: "starman@tesla.com",
@@ -27,7 +20,6 @@ describe("routes : votes", () => {
       })
       .then((res) => {
         this.user = res;
-
         Topic.create({
           title: "Expeditions to Alpha Centauri",
           description: "A compilation of reports from recent visits to the star system.",
@@ -54,7 +46,4 @@ describe("routes : votes", () => {
       });
     });
   });
-
-  // test suites go here
-
 });
