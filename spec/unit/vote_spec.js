@@ -206,34 +206,38 @@ describe("Vote", () => {
         });
       });
       describe("#getPoints", () => {
-        it("should get the points of a given post provided", (done) => {
-          beforeEach((done) => {
-            Vote.create({
-              value: 1,
-              userId: this.user.id,
-              postId: this.post.id
-            })
-            .then((vote) => {
-              this.topic.posts[0].getPoints()
-              .then((postPoints) => {
-                console.log("Points " + postPoints);
-                done();
-              }) 
-              .catch((err) => {
-                console.log(err);
-                done();
-              })
-            })
-            .catch((err) => {
-              console.log(err);
-              done();
-            })
+        beforeEach((done) => {
+          Vote.create({
+            value: 1,
+            userId: 1,
+            postId: 1
           })
-          this.post.getPoints()
-          .then((points) => {
-            console.log("points: " + points);
+          .then((vote) => {
+            this.vote = vote;
+            //console.log("success");
+            //console.log(vote);
             done();
           })
+          .catch((err) => {
+            console.log(err);
+            done();
+          })
+        })
+        it("should get the points of a given post provided", (done) => {
+          Post.findOne({
+          })
+          .then((post) => {
+            //console.log("points: " + post.getPoints()); 
+            expect(this.post.getPoints()).toBe(0); //No votes for the first post
+            done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          })
+          //console.log(this.topic.posts);
+          //console.log(this.topic.posts[0].getPoints());
+          //done();
         })
       })
 });

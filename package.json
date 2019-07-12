@@ -22,7 +22,7 @@
   "homepage": "https://github.com/JackWSargent/bloccit#readme",
   "devDependencies": {
     "faker": "^4.1.0",
-    "jasmine": "~2.4.1",
+    "jasmine": "^3.4.0",
     "request": "^2.83.0"
   },
   "dependencies": {
