@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.associate = function(models) {
     Post.belongsTo(models.Topic, {
       foreignKey: "topicId",
-      onDelete: "CASCADE",
+      onDelete: "CASCADE"
     });
     Post.belongsTo(models.User, {
       foreignKey: "userId",
@@ -37,12 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
   Post.prototype.getPoints = function(){
-    if(this.votes.length === 0) return 0
-
-    return this.votes
-      .map((v) => { return v.value })
-      .reduce((prev, next) => { return prev + next });
-    };
-   
+        if(this.votes.length === 0) return 0
+        return this.votes
+          .map((v) => { return v.value })
+          .reduce((prev, next) => { return prev + next });
+  };
   return Post;
 };
