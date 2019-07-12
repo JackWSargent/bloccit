@@ -214,30 +214,82 @@ describe("Vote", () => {
           })
           .then((vote) => {
             this.vote = vote;
-            //console.log("success");
-            //console.log(vote);
             done();
           })
           .catch((err) => {
+            console.log("Vote ERROR");
             console.log(err);
             done();
           })
         })
         it("should get the points of a given post provided", (done) => {
-          Post.findOne({
-          })
-          .then((post) => {
-            //console.log("points: " + post.getPoints()); 
+          Post.findOne()
+          .then((post) => { 
             expect(this.post.getPoints()).toBe(0); //No votes for the first post
             done();
           })
           .catch((err) => {
             console.log(err);
             done();
+          });
+        });
+      });
+      describe("#hasUpVoteFor", () => {
+        beforeEach((done) => {
+          Vote.create({
+            value: 1,
+            userId: 1,
+            postId: 1
           })
-          //console.log(this.topic.posts);
-          //console.log(this.topic.posts[0].getPoints());
-          //done();
+          .then((vote) => {
+            this.vote = vote;
+            done();
+          })
+          .catch((err) => {
+            console.log("Vote ERROR");
+            console.log(err);
+            done();
+          })
         })
-      })
+        it("should get the points of a given post provided", (done) => {
+          Post.findOne()
+          .then((post) => { 
+            expect(this.post.hasUpVoteFor()).toBe(true); //Has upvote
+            done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        });
+      });
+      describe("#hasDownVoteFor", () => {
+        beforeEach((done) => {
+          Vote.create({
+            value: -1,
+            userId: 1,
+            postId: 1
+          })
+          .then((vote) => {
+            this.vote = vote;
+            done();
+          })
+          .catch((err) => {
+            console.log("Vote ERROR");
+            console.log(err);
+            done();
+          })
+        })
+        it("should get the points of a given post provided", (done) => {
+          Post.findOne()
+          .then((post) => { 
+            expect(this.post.hasDownVoteFor()).toBe(true); //Has upvote
+            done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        });
+      });
 });
