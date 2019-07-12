@@ -14,6 +14,9 @@
           </li>
           <% if(currentUser) { %>
             <li class="list-group-item list-group-item-action">
+              <a class="nav-item" href="/users/<%= currentUser.id %>">Profile</a>
+            </li>
+            <li class="list-group-item list-group-item-action">
               <a class="nav-item" href="/users/sign_out">Sign out</a>
             </li>
           <% } else { %>
