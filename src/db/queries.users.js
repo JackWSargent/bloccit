@@ -3,6 +3,7 @@ const User = require("./models").User;
 const bcrypt = require("bcryptjs");
 const Post = require("./models").Post;
 const Comment = require("./models").Comment;
+const Favorite = require("./models").Favorite;
 module.exports = {
   createUser(newUser, callback){
     const salt = bcrypt.genSaltSync();
@@ -23,6 +24,7 @@ module.exports = {
        User.findByPk(id)
        .then((user) => {
          if(!user) {
+           console.log("User not found");
            callback(404);
          } else {
           result["user"] = user;
@@ -37,8 +39,17 @@ module.exports = {
             .catch((err) => {
               callback(err);
             })
+            Favorite.scope({method: ["lastFiveFor", id]}).findAll()
+              .then((favorites) => {
+                result["favorites"] = favorites;
+                callback(null, result);
+              })
+              .catch((err) => {
+                callback(err);//
+            })
         })
       }
     })
   }
 }
+

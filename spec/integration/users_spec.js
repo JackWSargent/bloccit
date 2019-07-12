@@ -6,6 +6,7 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
 const Comment = require("../../src/db/models").Comment;
+const Favorite = require("../../src/db/models").Favorite
 describe("routes : users", () => {
   beforeEach((done) => {
     sequelize.sync({force: true})
@@ -88,6 +89,7 @@ describe("routes : users", () => {
         this.user;
         this.post;
         this.comment;
+        this.favorite;
         User.create({
           email: "starman@tesla.com",
           password: "Trekkie4lyfe"
@@ -117,7 +119,18 @@ describe("routes : users", () => {
             })
             .then((res) => {
               this.comment = res;
-              done();
+              Favorite.create({
+                postId: this.post.id,
+                userId: this.user.id
+              })
+              .then((res) => {
+                this.favorite = res;
+                done()
+              })
+              .catch((err) => {
+                console.log(err);
+                done();
+              })
             })
           })
         })
